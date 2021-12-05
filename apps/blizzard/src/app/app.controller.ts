@@ -20,12 +20,17 @@ class EnhanceImageDto {
   @Type(() => Boolean)
   @IsBoolean()
   @IsOptional()
-  grayscale?: boolean = false;
+  grayscale?: boolean;
+
+  @Type(() => Boolean)
+  @IsBoolean()
+  @IsOptional()
+  invert?: boolean;
 
   @Type(() => Number)
   @IsNumber()
   @Min(0)
-  @Max(100)
+  @Max(255)
   @IsOptional()
   threshold?: number;
 
@@ -71,6 +76,7 @@ export class AppController {
         image.buffer,
         enhanceImageDto.grayscale,
         enhanceImageDto.threshold,
+        enhanceImageDto.invert,
         cropOptions
       );
 

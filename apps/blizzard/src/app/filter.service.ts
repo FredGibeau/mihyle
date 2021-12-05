@@ -14,24 +14,24 @@ export class FilterService {
     imageBuffer: Buffer,
     grayscale?: boolean,
     threshold?: number,
+    invert?: boolean,
     cropOptions?: CropOptions
   ) {
-    console.log('Enhancing...');
-    console.log(cropOptions);
     let image = sharp(imageBuffer);
 
+    if (invert) {
+      image = image.negate();
+    }
+
     if (cropOptions) {
-      console.log('Cropping...');
       image = image.extract(cropOptions);
     }
 
     if (grayscale) {
-      console.log('Grayscalling...');
       image = image.grayscale();
     }
 
     if (threshold) {
-      console.log('Thresholding...' + threshold);
       image = image.threshold(threshold);
     }
 
