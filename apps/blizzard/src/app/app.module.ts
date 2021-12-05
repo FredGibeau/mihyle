@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
-import { TesseractService } from './tesseract.service';
+import { FilterService } from './filter.service';
 
 @Module({
   imports: [],
   controllers: [AppController],
-  providers: [TesseractService],
+  providers: [FilterService],
 })
 export class AppModule {}

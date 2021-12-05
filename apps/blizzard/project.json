@@ -1,0 +1,52 @@
+{
+  "root": "apps/blizzard",
+  "sourceRoot": "apps/blizzard/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/blizzard",
+        "main": "apps/blizzard/src/main.ts",
+        "tsConfig": "apps/blizzard/tsconfig.app.json",
+        "assets": ["apps/blizzard/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/blizzard/src/environments/environment.ts",
+              "with": "apps/blizzard/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:execute",
+      "options": {
+        "buildTarget": "blizzard:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/blizzard/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/blizzard"],
+      "options": {
+        "jestConfig": "apps/blizzard/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
