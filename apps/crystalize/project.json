@@ -18,7 +18,7 @@
           "apps/crystalize/src/favicon.ico",
           "apps/crystalize/src/assets"
         ],
-        "styles": ["apps/crystalize/src/styles.sass"],
+        "styles": ["apps/crystalize/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
