@@ -29,5 +29,21 @@
       }
     ]
   },
-  "defaultProject": "nova"
+  "defaultProject": "nova",
+  "generators": {
+    "@nrwl/angular:application": {
+      "style": "sass",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "sass",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "sass"
+    }
+  }
 }

@@ -1,0 +1,28 @@
+{
+  "root": "apps/crystalize-e2e",
+  "sourceRoot": "apps/crystalize-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/crystalize-e2e/cypress.json",
+        "devServerTarget": "crystalize:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "crystalize:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/crystalize-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["crystalize"]
+}

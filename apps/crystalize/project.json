@@ -1,0 +1,94 @@
+{
+  "projectType": "application",
+  "root": "apps/crystalize",
+  "sourceRoot": "apps/crystalize/src",
+  "prefix": "mihyle",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/crystalize",
+        "index": "apps/crystalize/src/index.html",
+        "main": "apps/crystalize/src/main.ts",
+        "polyfills": "apps/crystalize/src/polyfills.ts",
+        "tsConfig": "apps/crystalize/tsconfig.app.json",
+        "inlineStyleLanguage": "sass",
+        "assets": [
+          "apps/crystalize/src/favicon.ico",
+          "apps/crystalize/src/assets"
+        ],
+        "styles": ["apps/crystalize/src/styles.sass"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/crystalize/src/environments/environment.ts",
+              "with": "apps/crystalize/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "crystalize:build:production"
+        },
+        "development": {
+          "browserTarget": "crystalize:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "crystalize:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/crystalize/src/**/*.ts",
+          "apps/crystalize/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/crystalize"],
+      "options": {
+        "jestConfig": "apps/crystalize/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
