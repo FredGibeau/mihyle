@@ -4,7 +4,7 @@ import { Multer } from 'multer';
 import {
   Body,
   Controller,
-  Get,
+  Post,
   Query,
   UploadedFile,
   UseInterceptors,
@@ -31,7 +31,7 @@ class FromBase64QueryDto {
 export class AppController {
   constructor(private readonly appService: TesseractService) {}
 
-  @Get('ocr')
+  @Post('ocr')
   @UseInterceptors(FileInterceptor('image'))
   async ocr(
     @UploadedFile() image: Express.Multer.File,
@@ -41,11 +41,12 @@ export class AppController {
     return ocr;
   }
 
-  @Get('ocrFromBase64')
+  @Post('ocrFromBase64')
   async ocrFromBuffer(
     @Body() fromBase64BodyDto: FromBase64BodyDto,
     @Query() fromBase64QueryDto: FromBase64QueryDto
   ) {
+    console.log(fromBase64BodyDto);
     const ocr = await this.appService.ocr(
       Buffer.from(fromBase64BodyDto.base64, 'base64'),
       fromBase64QueryDto.language

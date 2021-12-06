@@ -3,5 +3,8 @@
 >
   <i class="fas fa-cloud-upload-alt fa-3x"></i>
   <span class="mt-2 text-base leading-normal">Select a file</span>
-  <input type="file" class="hidden" />
+  <input type="file" class="hidden" (change)="uploadFile($event)" />
 </label>
+<div *ngIf="parsedText">
+  {{ parsedText }}
+</div>

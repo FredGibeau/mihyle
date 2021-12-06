@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "blink": "apps/blink",
     "blizzard": "apps/blizzard",
     "crystalize": "apps/crystalize",
     "crystalize-e2e": "apps/crystalize-e2e",

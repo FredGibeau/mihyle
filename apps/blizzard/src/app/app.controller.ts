@@ -3,9 +3,9 @@
 import { Multer } from 'multer';
 import {
   Controller,
-  Get,
   HttpException,
   HttpStatus,
+  Post,
   Query,
   UploadedFile,
   UseInterceptors,
@@ -64,13 +64,16 @@ class EnhanceImageDto {
 export class AppController {
   constructor(private readonly filterService: FilterService) {}
 
-  @Get('enhance')
+  @Post('enhance')
   @UseInterceptors(FileInterceptor('image'))
   async enhance(
     @UploadedFile() image: Express.Multer.File,
     @Query() enhanceImageDto: EnhanceImageDto
   ) {
     try {
+      if (!image) {
+        throw new HttpException('Image is null', HttpStatus.BAD_REQUEST);
+      }
       const cropOptions = this.extractCropOptions(enhanceImageDto);
       const enhancedImage = await this.filterService.enhance(
         image.buffer,
