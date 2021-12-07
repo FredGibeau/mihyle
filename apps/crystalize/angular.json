@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "projects": {
+    "crystalize": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {}
+    }
+  }
+}
