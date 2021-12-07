@@ -23,6 +23,7 @@ export class AppComponent {
       axios
         .post('http://localhost:3334/api/enhance', enhanceFormData, {
           params: {
+            // TODO Create a constant for this
             grayscale: true,
             threshold: 216,
             left: 220,
@@ -34,7 +35,7 @@ export class AppComponent {
           },
         })
         .then((response) => {
-          const ocrSearchParams: FormData = new URLSearchParams();
+          const ocrSearchParams: URLSearchParams = new URLSearchParams();
           ocrSearchParams.append('base64', response.data);
           axios
             .post('http://localhost:3333/api/ocrFromBase64', ocrSearchParams, {
@@ -43,7 +44,32 @@ export class AppComponent {
               },
             })
             .then((response) => {
-              this.parsedText = response.data;
+              // TODO Add all regexs
+              const regexs = [
+                '(-* *[0-9]+) *(Intelligence)',
+                '(-* *[0-9]+) *(Force)',
+                '(-* *[0-9]+) *(Agilité)',
+                '(-* *[0-9]+) *(Change)',
+              ];
+              axios
+                .post('http://localhost:3335/api/getResultsFromRegexs', {
+                  message: response.data,
+                  regexs: regexs,
+                })
+                .then((response) => {
+                  regexs.map((regex) => {
+                    const match = response.data[regex];
+                    // TODO Define what we want to do with empty results
+                    if (this.parsedText) {
+                      this.parsedText += match ? `${match[0]}\n` : '';
+                    } else {
+                      this.parsedText = match ? `${match[0]}\n` : '';
+                    }
+                  });
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
             })
             .catch((error) => {
               console.log(error);

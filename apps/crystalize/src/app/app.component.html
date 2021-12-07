@@ -6,5 +6,5 @@
   <input type="file" class="hidden" (change)="uploadFile($event)" />
 </label>
 <div *ngIf="parsedText">
-  {{ parsedText }}
+  <p [innerText]="parsedText"></p>
 </div>

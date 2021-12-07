@@ -46,7 +46,6 @@ export class AppController {
     @Body() fromBase64BodyDto: FromBase64BodyDto,
     @Query() fromBase64QueryDto: FromBase64QueryDto
   ) {
-    console.log(fromBase64BodyDto);
     const ocr = await this.appService.ocr(
       Buffer.from(fromBase64BodyDto.base64, 'base64'),
       fromBase64QueryDto.language
