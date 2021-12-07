@@ -49,7 +49,7 @@ export class AppComponent {
                 '(-* *[0-9]+) *(Intelligence)',
                 '(-* *[0-9]+) *(Force)',
                 '(-* *[0-9]+) *(Agilité)',
-                '(-* *[0-9]+) *(Change)',
+                '(-* *[0-9]+) *(Chance)',
               ];
               axios
                 .post('http://localhost:3335/api/getResultsFromRegexs', {
