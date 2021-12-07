@@ -52,7 +52,10 @@ export class AppComponent {
                 '(-* *[0-9]+) *(Chance)',
                 '(-* *[0-9]+) *(Vitalité)',
                 '(-* *[0-9]+) *(Sagesse)',
+                // TODO Filter out when it's weapon's AP cost
                 '(-* *[0-9]+) *(PA)',
+                // TODO Filter out when it's weapon added damages
+                // TODO Make sure to distinguish from base damage weapons
                 '(-* *[0-9]+) *(Dommages)',
                 '(-* *[0-9]+) *(Invocation)',
                 '(-* *[0-9]+) *(Fuite)',
@@ -63,6 +66,7 @@ export class AppComponent {
                   regexs: regexs,
                 })
                 .then((response) => {
+                  this.parsedText = '';
                   regexs.map((regex) => {
                     const match = response.data[regex];
                     // TODO Define what we want to do with empty results
