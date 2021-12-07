@@ -50,6 +50,12 @@ export class AppComponent {
                 '(-* *[0-9]+) *(Force)',
                 '(-* *[0-9]+) *(Agilité)',
                 '(-* *[0-9]+) *(Chance)',
+                '(-* *[0-9]+) *(Vitalité)',
+                '(-* *[0-9]+) *(Sagesse)',
+                '(-* *[0-9]+) *(PA)',
+                '(-* *[0-9]+) *(Dommages)',
+                '(-* *[0-9]+) *(Invocation)',
+                '(-* *[0-9]+) *(Fuite)',
               ];
               axios
                 .post('http://localhost:3335/api/getResultsFromRegexs', {
