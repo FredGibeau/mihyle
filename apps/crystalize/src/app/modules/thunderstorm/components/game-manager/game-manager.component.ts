@@ -13,14 +13,14 @@ export class GameManagerComponent {
     this.currentQuestionIndex = 0;
   }
 
-  onPressEnter() {
-    ++this.currentQuestionIndex;
-  }
-
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
     if (event.key == 'Enter') {
       this.onPressEnter();
     }
+  }
+
+  onPressEnter() {
+    ++this.currentQuestionIndex;
   }
 }
