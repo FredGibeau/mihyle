@@ -1,4 +1,6 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { QuestionCard } from '../../interfaces/question.interface';
 
 @Component({
   selector: 'mihyle-game-manager',
@@ -6,21 +8,62 @@ import { Component, HostListener } from '@angular/core';
   styleUrls: ['./game-manager.component.scss'],
 })
 export class GameManagerComponent {
-  questions: string[] = ['Question #1', 'Question #2', 'Question #3'];
-  currentQuestionIndex: number;
+  questionCards: QuestionCard[] = [
+    {
+      question: {
+        title: 'Title Question 1',
+        question: 'The question 1',
+        imageUrl: '',
+      },
+      answer: {
+        title: 'Title Answer 1',
+        answer: 'The answer 1',
+        imageUrl: '',
+      },
+    },
+    {
+      question: {
+        title: 'Title Question 2',
+        question: 'The question 2',
+        imageUrl: '',
+      },
+      answer: {
+        title: 'Title Answer 2',
+        answer: 'The answer 2',
+        imageUrl: '',
+      },
+    },
+    {
+      question: {
+        title: 'Title Question 3',
+        question: 'The question 3',
+        imageUrl: '',
+      },
+      answer: {
+        title: 'Title Answer 3',
+        answer: 'The answer 3',
+        imageUrl: '',
+      },
+    },
+  ];
+
+  currentQuestion$: BehaviorSubject<QuestionCard>;
 
   constructor() {
-    this.currentQuestionIndex = 0;
+    this.currentQuestion$ = new BehaviorSubject<QuestionCard>(
+      this.questionCards[0]
+    );
   }
 
-  @HostListener('window:keydown', ['$event'])
-  onKeyDown(event: KeyboardEvent) {
-    if (event.key == 'Enter') {
-      this.onPressEnter();
+  OnClickNext = (): void => {
+    if (this.currentQuestion$.value) {
+      const currentIndex = this.questionCards.indexOf(
+        this.currentQuestion$.value
+      );
+
+      if (currentIndex < this.questionCards.length - 1) {
+        this.currentQuestion$.next(this.questionCards[currentIndex + 1]);
+      }
     }
-  }
-
-  onPressEnter() {
-    ++this.currentQuestionIndex;
-  }
+  };
 }
