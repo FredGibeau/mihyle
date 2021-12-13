@@ -1,8 +1,31 @@
 <div class="bg-gray-200 w-screen h-screen">
   <div class="flex justify-center h-full items-center">
-    <mihyle-question-card
-      [questionCard]="currentQuestion$ | async"
-    ></mihyle-question-card>
+    <ng-template [ngIf]="isCurrentGameStartState()">
+      <p>Game Start!</p>
+    </ng-template>
+    <ng-template [ngIf]="isCurrentGameStartRoundState()">
+      <p>Round Start!</p>
+    </ng-template>
+    <ng-template [ngIf]="isCurrentGameQuizState()">
+      <ng-template [ngIf]="getCurrentQuizAsQuestion()">
+        <mihyle-question-quiz
+          [questionQuiz]="getCurrentQuizAsQuestion()"
+          [questionIndex]="currentQuestionIndex$ | async"
+        ></mihyle-question-quiz>
+      </ng-template>
+      <ng-template [ngIf]="getCurrentQuizAsKaraoke()">
+        <mihyle-karaoke-quiz
+          [karaokeQuiz]="getCurrentQuizAsKaraoke()"
+          [questionIndex]="currentQuestionIndex$ | async"
+        ></mihyle-karaoke-quiz>
+      </ng-template>
+    </ng-template>
+    <ng-template [ngIf]="isCurrentGameEndRoundState()">
+      <p>Round End!</p>
+    </ng-template>
+    <ng-template [ngIf]="isCurrentGameEndGameState()">
+      <p>Game End!</p>
+    </ng-template>
     <button (click)="OnClickNext()">Next</button>
   </div>
 </div>

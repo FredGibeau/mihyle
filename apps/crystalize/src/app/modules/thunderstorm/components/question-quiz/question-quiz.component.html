@@ -1,0 +1,23 @@
+<ng-container *ngIf="questionQuiz; else noQuestionQuiz">
+  <ng-container *ngIf="questionQuiz.questions; else noQuestion">
+    <ng-container
+      *ngIf="
+        questionIndex !== undefined && questionIndex !== null;
+        else noQuestionIndex
+      "
+    >
+      <mihyle-quiz-card [quiz]="questionQuiz" [questionIndex]="questionIndex">
+        {{ questionQuiz.questions[questionIndex] }}
+      </mihyle-quiz-card>
+    </ng-container>
+  </ng-container>
+</ng-container>
+<ng-template #noQuestionQuiz>
+  <p>No question quiz has been passed in Input of QuestionQuizComponent</p>
+</ng-template>
+<ng-template #noQuestion>
+  <p>No question quiz into the questionQuiz input of QuestionQuizComponent</p>
+</ng-template>
+<ng-template #noQuestionIndex>
+  <p>No question index has been passed in Input of QuestionQuizComponent</p>
+</ng-template>
