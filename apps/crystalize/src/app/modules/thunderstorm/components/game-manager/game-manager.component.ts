@@ -56,7 +56,8 @@ export class GameManagerComponent {
       {
         imageUrl: 'http://imageURL.com',
         title: 'Title Karaoke 1',
-        youtubeUrl: 'http://youtubeURL.com',
+        youtubeVideoId: 'E05SSymMvdY',
+        timestampsSeconds: [3, 5, 10],
         questions: [
           '______ ____ _______',
           '______ ____ _______ ______',
@@ -67,7 +68,8 @@ export class GameManagerComponent {
       {
         imageUrl: 'http://imageURL.com',
         title: 'Title Karaoke 2',
-        youtubeUrl: 'http://youtubeURL.com',
+        youtubeVideoId: 'woFTMwLJilI',
+        timestampsSeconds: [5, 10, 12],
         questions: [
           '______ ____ _______ _______ ______ ______ _____',
           '______ ____ _______ _______ ______ ______ _____ ______',
@@ -79,11 +81,11 @@ export class GameManagerComponent {
 
     this.game = {
       rounds: [
-        {
+        /*{
           title: 'Simple Questions!',
           type: QuizType.Question,
           quizes: questionQuizes,
-        },
+        },*/
         {
           title: 'Simple Karaoke!',
           type: QuizType.Karaoke,

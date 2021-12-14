@@ -4,6 +4,7 @@ import { GameManagerComponent } from './components/game-manager/game-manager.com
 import { QuizCardComponent } from './components/quiz-card/quiz-card.component';
 import { KaraokeQuizComponent } from './components/karaoke-quiz/karaoke-quiz.component';
 import { QuestionQuizComponent } from './components/question-quiz/question-quiz.component';
+import { YouTubePlayerModule } from '@angular/youtube-player';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,7 @@ import { QuestionQuizComponent } from './components/question-quiz/question-quiz.
     KaraokeQuizComponent,
     QuizCardComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, YouTubePlayerModule],
   exports: [GameManagerComponent],
 })
 export class ThunderstormModule {}
