@@ -1,12 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  BehaviorSubject,
-  filter,
-  interval,
-  Subject,
-  takeUntil,
-  timer,
-} from 'rxjs';
+import { Component } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { DrawQuiz } from '../../interfaces/draw-interface';
 import { EnumerationQuiz } from '../../interfaces/enumeration.interface';
 import {
@@ -19,6 +12,7 @@ import { PictoQuiz } from '../../interfaces/picto.interface';
 import { PictureQuiz } from '../../interfaces/picture.interface';
 import { QuestionQuiz } from '../../interfaces/question.interface';
 import { Quiz, QuizType } from '../../interfaces/quiz.interface';
+import { TimerService } from '../../services/timer.service';
 
 @Component({
   selector: 'mihyle-game-manager',
@@ -27,10 +21,6 @@ import { Quiz, QuizType } from '../../interfaces/quiz.interface';
 })
 export class GameManagerComponent {
   private game: IGame;
-
-  isTimerActive = false;
-  timer: number | undefined | null = undefined;
-  timerEnds$: Subject<void> | undefined | null = undefined;
 
   currentGameState$: BehaviorSubject<GameStateType> =
     new BehaviorSubject<GameStateType>(GameStateType.StartGame);
@@ -45,7 +35,7 @@ export class GameManagerComponent {
   currentQuestionIndex$: BehaviorSubject<number | undefined | null> =
     new BehaviorSubject<number | undefined | null>(undefined);
 
-  constructor() {
+  constructor(public timerService: TimerService) {
     const questionQuizes: QuestionQuiz[] = [
       {
         imageUrl: 'https://picsum.photos/200?random=1',
@@ -292,59 +282,6 @@ export class GameManagerComponent {
     this.currentQuestionIndex$.next(null);
   };
 
-  private startTimer(): void {
-    if (!this.timer) {
-      console.log('Trying to start timer, but timer is undefined.');
-
-      return;
-    }
-
-    if (!this.timerEnds$) {
-      console.log('Trying to start timer, but timer end is undefined.');
-
-      return;
-    }
-
-    interval(1000)
-      .pipe(takeUntil(this.timerEnds$))
-      .subscribe(() => {
-        if (!this.timer) {
-          console.log('Timer passed in the subscribe, but timer is undefined.');
-          return;
-        }
-
-        this.isTimerActive = true;
-        --this.timer;
-
-        if (this.timer === 0) {
-          if (!this.timerEnds$) {
-            console.log(
-              'Tried to end the timer, but the timerEnds subject is undefined.'
-            );
-            return;
-          }
-
-          this.timerEnds$.next();
-          this.timerEnds$.complete();
-          this.timer = null;
-          this.timerEnds$ = null;
-          this.isTimerActive = false;
-        }
-      });
-  }
-
-  private initializeTimer(seconds: number): void {
-    this.timer = seconds;
-
-    if (this.timerEnds$) {
-      this.timerEnds$.next();
-      this.timerEnds$.complete();
-      this.isTimerActive = false;
-    }
-
-    this.timerEnds$ = new Subject<void>();
-  }
-
   // TODO Game State Service
   public OnClickNext = (): void => {
     if (this.currentGameState$.value === GameStateType.StartGame) {
@@ -356,9 +293,11 @@ export class GameManagerComponent {
         this.currentQuestionIndex$.next(0);
         this.currentGameState$.next(GameStateType.Quiz);
         console.log('Next Quiz ! ');
-        this.initializeTimer(this.currentRound$.value.timer.seconds);
+        this.timerService.initializeTimer(
+          this.currentRound$.value.timer.seconds
+        );
         if (this.currentRound$.value.timer.autoStart) {
-          this.startTimer();
+          this.timerService.startTimer();
         }
       } else {
         console.log(
@@ -399,9 +338,11 @@ export class GameManagerComponent {
         this.currentQuiz$.value.questions.length - 1
       ) {
         this.currentQuestionIndex$.next(this.currentQuestionIndex$.value + 1);
-        this.initializeTimer(this.currentRound$.value.timer.seconds);
+        this.timerService.initializeTimer(
+          this.currentRound$.value.timer.seconds
+        );
         if (this.currentRound$.value.timer.autoStart) {
-          this.startTimer();
+          this.timerService.startTimer();
         }
       } else {
         const currentQuizIndex = this.currentRound$.value.quizes.indexOf(
@@ -576,8 +517,8 @@ export class GameManagerComponent {
       return;
     }
 
-    if (!this.isTimerActive) {
-      this.startTimer();
+    if (!this.timerService.isTimerActive) {
+      this.timerService.startTimer();
     }
   }
 }
