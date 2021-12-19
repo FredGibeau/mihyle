@@ -19,6 +19,18 @@
           [questionIndex]="currentQuestionIndex$ | async"
         ></mihyle-karaoke-quiz>
       </ng-template>
+      <ng-template [ngIf]="getCurrentQuizAsPicture()">
+        <mihyle-picture-quiz
+          [pictureQuiz]="getCurrentQuizAsPicture()"
+          [questionIndex]="currentQuestionIndex$ | async"
+        ></mihyle-picture-quiz>
+      </ng-template>
+      <ng-template [ngIf]="getCurrentQuizAsPicto()">
+        <mihyle-picto-quiz
+          [pictoQuiz]="getCurrentQuizAsPicto()"
+          [questionIndex]="currentQuestionIndex$ | async"
+        ></mihyle-picto-quiz>
+      </ng-template>
     </ng-template>
     <ng-template [ngIf]="isCurrentGameEndRoundState()">
       <p>Round End!</p>

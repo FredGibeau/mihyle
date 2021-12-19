@@ -1,0 +1,29 @@
+<ng-container *ngIf="pictureQuiz; else noPictureQuiz">
+  <ng-container *ngIf="pictureQuiz.questions; else noQuestion">
+    <ng-container
+      *ngIf="
+        questionIndex !== undefined && questionIndex !== null;
+        else noQuestionIndex
+      "
+    >
+      <mihyle-quiz-card [quiz]="pictureQuiz" [questionIndex]="questionIndex">
+        <img
+          #picture
+          [src]="pictureQuiz.imageUrl"
+          alt="picture_quiz"
+          (mouseover)="pauseAnimation()"
+          (mouseleave)="resumeAnimation()"
+        />
+      </mihyle-quiz-card>
+    </ng-container>
+  </ng-container>
+</ng-container>
+<ng-template #noPictureQuiz>
+  <p>No picture quiz has been passed in Input of PictureComponent</p>
+</ng-template>
+<ng-template #noQuestion>
+  <p>No picture quiz into the questionQuiz input of PictureComponent</p>
+</ng-template>
+<ng-template #noQuestionIndex>
+  <p>No picture index has been passed in Input of PictureComponent</p>
+</ng-template>

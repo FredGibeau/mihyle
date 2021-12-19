@@ -8,4 +8,6 @@ export class Quiz {
 export enum QuizType {
   Question,
   Karaoke,
+  Picture,
+  Picto,
 }

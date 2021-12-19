@@ -6,6 +6,8 @@ import {
   GameStateType,
 } from '../../interfaces/game-manager.interface';
 import { KaraokeQuiz } from '../../interfaces/karaoke.interface';
+import { PictoQuiz } from '../../interfaces/picto.interface';
+import { PictureQuiz } from '../../interfaces/picture.interface';
 import { QuestionQuiz } from '../../interfaces/question.interface';
 import { Quiz, QuizType } from '../../interfaces/quiz.interface';
 
@@ -33,40 +35,84 @@ export class GameManagerComponent {
   constructor() {
     const questionQuizes: QuestionQuiz[] = [
       {
-        imageUrl: 'http://imageURL.com',
+        imageUrl: 'https://picsum.photos/200?random=1',
         title: 'Title Question 1',
-        questions: ['The question 1'],
-        answers: ['The answer 1'],
+        questions: [
+          'The question 1.1',
+          'The question 1.2',
+          'The question 1.3',
+          'The question 1.4',
+          'The question 1.5',
+          'The question 1.6',
+          'The question 1.7',
+          'The question 1.8',
+          'The question 1.9',
+          'The question 1.10',
+        ],
+        answers: [
+          'The answer 1.1',
+          'The answer 1.2',
+          'The answer 1.3',
+          'The answer 1.4',
+          'The answer 1.5',
+          'The answer 1.6',
+          'The answer 1.7',
+          'The answer 1.8',
+          'The answer 1.9',
+          'The answer 1.10',
+        ],
       },
       {
-        imageUrl: 'http://imageURL.com',
+        imageUrl: 'https://picsum.photos/200?random=1',
         title: 'Title Question 2',
-        questions: ['The question 2'],
-        answers: ['The answer 2'],
-      },
-      {
-        imageUrl: 'http://imageURL.com',
-        title: 'Title Question 3',
-        questions: ['The question 3'],
-        answers: ['The answer 3'],
+        questions: [
+          'The question 2.1',
+          'The question 2.2',
+          'The question 2.3',
+          'The question 2.4',
+          'The question 2.5',
+          'The question 2.6',
+          'The question 2.7',
+          'The question 2.8',
+          'The question 2.9',
+          'The question 2.10',
+        ],
+        answers: [
+          'The answer 2.1',
+          'The answer 2.2',
+          'The answer 2.3',
+          'The answer 2.4',
+          'The answer 2.5',
+          'The answer 2.6',
+          'The answer 2.7',
+          'The answer 2.8',
+          'The answer 2.9',
+          'The answer 2.10',
+        ],
       },
     ];
 
     const karaokeQuizes: KaraokeQuiz[] = [
       {
-        imageUrl: 'http://imageURL.com',
+        imageUrl: 'https://picsum.photos/200?random=4',
         title: 'Title Karaoke 1',
         youtubeVideoId: 'E05SSymMvdY',
-        timestampsSeconds: [3, 5, 10],
+        timestampsSeconds: [3, 5, 10, 160],
         questions: [
           '______ ____ _______',
           '______ ____ _______ ______',
           '______ ____ _______ _______ ________',
+          'Enjoy the rest of the song !',
         ],
-        answers: ['Solution 1.1', 'Solution 1.2', 'Solution 1.3'],
+        answers: [
+          'Solution 1.1',
+          'Solution 1.2',
+          'Solution 1.3',
+          'Enjoy the rest of the song !',
+        ],
       },
       {
-        imageUrl: 'http://imageURL.com',
+        imageUrl: 'https://picsum.photos/200?random=5',
         title: 'Title Karaoke 2',
         youtubeVideoId: 'woFTMwLJilI',
         timestampsSeconds: [5, 10, 12],
@@ -79,6 +125,66 @@ export class GameManagerComponent {
       },
     ];
 
+    const pictureQuizes: PictureQuiz[] = [
+      {
+        imageUrl: 'https://picsum.photos/200?random=6',
+        title: 'Title Picture 1',
+        questions: ['The picture 1'],
+        answers: ['The answer picture 1'],
+        pictureUrl: 'https://picsum.photos/200/300?random=7',
+      },
+      {
+        imageUrl: 'https://picsum.photos/200?random=8',
+        title: 'Title Picture 2',
+        questions: ['The picture 2'],
+        answers: ['The answer picture 2'],
+        pictureUrl: 'https://picsum.photos/200/300?random=9',
+      },
+      {
+        imageUrl: 'https://picsum.photos/200?random=10',
+        title: 'Title Picture 3',
+        questions: ['The picture 3'],
+        answers: ['The answer picture 3'],
+        pictureUrl: 'https://picsum.photos/200/300?random=11',
+      },
+    ];
+
+    const pictoQuizes: PictoQuiz[] = [
+      {
+        imageUrl: 'https://picsum.photos/200?random=12',
+        title: 'Title Picture 1',
+        questions: ['The picture 1'],
+        answers: ['The answer picture 1'],
+        pictosUrl: [
+          'https://picsum.photos/200/300?random=13',
+          'https://picsum.photos/200/300?random=14',
+        ],
+      },
+      {
+        imageUrl: 'https://picsum.photos/200?random=15',
+        title: 'Title Picture 2',
+        questions: ['The picture 2'],
+        answers: ['The answer picture 2'],
+        pictosUrl: [
+          'https://picsum.photos/200/300?random=16',
+          'https://picsum.photos/200/300?random=17',
+          'https://picsum.photos/200/300?random=18',
+        ],
+      },
+      {
+        imageUrl: 'https://picsum.photos/200?random=19',
+        title: 'Title Picture 3',
+        questions: ['The picture 3'],
+        answers: ['The answer picture 3'],
+        pictosUrl: [
+          'https://picsum.photos/200/300?random=20',
+          'https://picsum.photos/200/300?random=21',
+          'https://picsum.photos/200/300?random=22',
+          'https://picsum.photos/200/300?random=23',
+        ],
+      },
+    ];
+
     this.game = {
       rounds: [
         /*{
@@ -86,10 +192,20 @@ export class GameManagerComponent {
           type: QuizType.Question,
           quizes: questionQuizes,
         },*/
-        {
-          title: 'Simple Karaoke!',
+        /*{
+          title: 'Simple Karaokes!',
           type: QuizType.Karaoke,
           quizes: karaokeQuizes,
+        },*/
+        /*{
+          title: 'Simple Pictures',
+          type: QuizType.Picture,
+          quizes: pictureQuizes,
+        },*/
+        {
+          title: 'Simple Pictos',
+          type: QuizType.Picto,
+          quizes: pictoQuizes,
         },
       ],
     };
@@ -224,6 +340,42 @@ export class GameManagerComponent {
     }
 
     return this.currentQuiz$.value as KaraokeQuiz;
+  };
+
+  public getCurrentQuizAsPicture = (): PictureQuiz | undefined => {
+    if (!this.currentRound$.value) {
+      console.log('Checking type of current round, but its value if falsy.');
+      return undefined;
+    }
+
+    if (!this.currentQuiz$.value) {
+      console.log('Checking type of current quiz, but its value if falsy.');
+      return undefined;
+    }
+
+    if (this.currentRound$.value.type !== QuizType.Picture) {
+      return undefined;
+    }
+
+    return this.currentQuiz$.value as PictureQuiz;
+  };
+
+  public getCurrentQuizAsPicto = (): PictoQuiz | undefined => {
+    if (!this.currentRound$.value) {
+      console.log('Checking type of current round, but its value if falsy.');
+      return undefined;
+    }
+
+    if (!this.currentQuiz$.value) {
+      console.log('Checking type of current quiz, but its value if falsy.');
+      return undefined;
+    }
+
+    if (this.currentRound$.value.type !== QuizType.Picto) {
+      return undefined;
+    }
+
+    return this.currentQuiz$.value as PictoQuiz;
   };
 
   public isCurrentGameStartState = (): boolean => {

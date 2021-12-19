@@ -1,0 +1,33 @@
+<ng-container *ngIf="pictoQuiz; else noPictoQuiz">
+  <ng-container *ngIf="pictoQuiz.questions; else noQuestion">
+    <ng-container
+      *ngIf="
+        questionIndex !== undefined && questionIndex !== null;
+        else noQuestionIndex
+      "
+    >
+      <mihyle-quiz-card [quiz]="pictoQuiz" [questionIndex]="questionIndex">
+        <div class="flex flex-row justify-evenly">
+          <img
+            *ngFor="let picto of pictoQuiz.pictosUrl"
+            #picture
+            [src]="picto"
+            alt="picture_quiz"
+          />
+        </div>
+      </mihyle-quiz-card>
+    </ng-container>
+  </ng-container>
+</ng-container>
+<ng-template #noPictoQuiz>
+  <p>No picto quiz has been passed in Input of PictoComponent</p>
+</ng-template>
+<ng-template #noQuestion>
+  <p>No picto quiz into the questionQuiz input of PictoComponent</p>
+</ng-template>
+<ng-template #noQuestionIndex>
+  <p>No picto index has been passed in Input of PictoComponent</p>
+</ng-template>
+<ng-template #noPictos>
+  <p>No pictos has been passed in Input of PictoComponent</p>
+</ng-template>
