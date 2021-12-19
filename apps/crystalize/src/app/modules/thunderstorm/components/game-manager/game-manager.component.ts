@@ -41,6 +41,7 @@ export class GameManagerComponent {
         imageUrl: 'https://picsum.photos/200?random=1',
         title: 'Title Question 1',
         questions: [
+          '',
           'The question 1.1',
           'The question 1.2',
           'The question 1.3',
@@ -53,6 +54,7 @@ export class GameManagerComponent {
           'The question 1.10',
         ],
         answers: [
+          '',
           'The answer 1.1',
           'The answer 1.2',
           'The answer 1.3',
@@ -238,10 +240,6 @@ export class GameManagerComponent {
           quizes: questionQuizes,
           timer: {
             seconds: 20,
-            autoStart: false,
-            goNextIndexOnTimerEnds: false,
-            goNextQuestionOnTimerEnds: false,
-            failOnTimerEnds: true,
           },
         },
         /*{
@@ -296,9 +294,6 @@ export class GameManagerComponent {
         this.timerService.initializeTimer(
           this.currentRound$.value.timer.seconds
         );
-        if (this.currentRound$.value.timer.autoStart) {
-          this.timerService.startTimer();
-        }
       } else {
         console.log(
           'The game was in a RoundState, but the current round was empty.'
@@ -341,9 +336,6 @@ export class GameManagerComponent {
         this.timerService.initializeTimer(
           this.currentRound$.value.timer.seconds
         );
-        if (this.currentRound$.value.timer.autoStart) {
-          this.timerService.startTimer();
-        }
       } else {
         const currentQuizIndex = this.currentRound$.value.quizes.indexOf(
           this.currentQuiz$.value
@@ -517,8 +509,17 @@ export class GameManagerComponent {
       return;
     }
 
-    if (!this.timerService.isTimerActive) {
-      this.timerService.startTimer();
+    this.timerService.startTimer();
+  }
+
+  public onResetTimerClick(): void {
+    if (!this.currentRound$.value) {
+      console.log(
+        'Tried to reset the timer, but the current round is undefined.'
+      );
+      return;
     }
+
+    this.timerService.initializeTimer(this.currentRound$.value.timer.seconds);
   }
 }

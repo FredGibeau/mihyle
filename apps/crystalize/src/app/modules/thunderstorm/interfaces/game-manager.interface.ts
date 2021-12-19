@@ -1,4 +1,5 @@
 import { Quiz, QuizType } from './quiz.interface';
+import { ITimer } from './timer.interface';
 
 export interface IGame {
   rounds: IRound[];
@@ -9,14 +10,6 @@ export interface IRound {
   type: QuizType;
   quizes: Quiz[];
   timer: ITimer;
-}
-
-export interface ITimer {
-  seconds: number;
-  goNextIndexOnTimerEnds: boolean;
-  goNextQuestionOnTimerEnds: boolean;
-  failOnTimerEnds: boolean;
-  autoStart: boolean;
 }
 
 export enum GameStateType {

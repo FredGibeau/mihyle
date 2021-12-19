@@ -12,13 +12,16 @@ export class TimerService {
   public startTimer(): void {
     if (!this.timer) {
       console.log('Trying to start timer, but timer is undefined.');
-
       return;
     }
 
     if (!this.timerEnds$) {
       console.log('Trying to start timer, but timer end is undefined.');
+      return;
+    }
 
+    if (this.isTimerActive) {
+      console.log('Trying to start timer, but timer is already active.');
       return;
     }
 
