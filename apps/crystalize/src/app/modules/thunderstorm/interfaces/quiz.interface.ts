@@ -10,4 +10,6 @@ export enum QuizType {
   Karaoke,
   Picture,
   Picto,
+  Enumeration,
+  Draw,
 }

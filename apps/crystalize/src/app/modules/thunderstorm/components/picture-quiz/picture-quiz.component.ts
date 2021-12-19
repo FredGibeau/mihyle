@@ -28,7 +28,7 @@ export class PictureQuizComponent implements AfterViewInit, OnChanges {
   questionIndex: number | undefined | null = undefined;
 
   @ViewChild('picture')
-  picture: ElementRef | undefined = undefined;
+  picture: ElementRef<HTMLImageElement> | undefined = undefined;
 
   private animationPlayer: AnimationPlayer | undefined;
 

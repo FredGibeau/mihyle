@@ -1,0 +1,23 @@
+<ng-container *ngIf="drawQuiz; else noDrawQuiz">
+  <ng-container *ngIf="drawQuiz.questions; else noQuestion">
+    <ng-container
+      *ngIf="
+        questionIndex !== undefined && questionIndex !== null;
+        else noQuestionIndex
+      "
+    >
+      <mihyle-quiz-card [quiz]="drawQuiz" [questionIndex]="questionIndex">
+        <canvas #canvas class="w-[{{ width }}px] h-[{{ height }}px]"></canvas>
+      </mihyle-quiz-card>
+    </ng-container>
+  </ng-container>
+</ng-container>
+<ng-template #noDrawQuiz>
+  <p>No picto quiz has been passed in Input of PictoComponent</p>
+</ng-template>
+<ng-template #noQuestion>
+  <p>No picto quiz into the questionQuiz input of PictoComponent</p>
+</ng-template>
+<ng-template #noQuestionIndex>
+  <p>No picto index has been passed in Input of PictoComponent</p>
+</ng-template>

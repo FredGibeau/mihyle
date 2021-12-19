@@ -1,0 +1,38 @@
+<ng-container *ngIf="enumerationQuiz; else noEnumerationQuiz">
+  <ng-container *ngIf="enumerationQuiz.questions; else noQuestion">
+    <ng-container
+      *ngIf="
+        questionIndex !== undefined && questionIndex !== null;
+        else noQuestionIndex
+      "
+    >
+      <mihyle-quiz-card
+        [quiz]="enumerationQuiz"
+        [questionIndex]="questionIndex"
+      >
+        <input
+          #input
+          *ngIf="!hasFailed; else failed"
+          (keydown.enter)="EnterSubmit()"
+        />
+      </mihyle-quiz-card>
+    </ng-container>
+  </ng-container>
+</ng-container>
+<ng-template #noEnumerationQuiz>
+  <p>No enumeration quiz has been passed in Input of EnumerationComponent</p>
+</ng-template>
+<ng-template #noQuestion>
+  <p>No enumeration quiz into the questionQuiz input of EnumerationComponent</p>
+</ng-template>
+<ng-template #noQuestionIndex>
+  <p>No enumeration index has been passed in Input of EnumerationComponent</p>
+</ng-template>
+<ng-template #noPictos>
+  <p>No enumeration has been passed in Input of EnumerationComponent</p>
+</ng-template>
+<ng-template #failed>
+  <ul>
+    <li *ngFor="let enum of enumerations">{{ enum }}</li>
+  </ul>
+</ng-template>

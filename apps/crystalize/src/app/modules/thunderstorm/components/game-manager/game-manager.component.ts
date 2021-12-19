@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { DrawQuiz } from '../../interfaces/draw-interface';
+import { EnumerationQuiz } from '../../interfaces/enumeration.interface';
 import {
   IGame,
   IRound,
@@ -63,7 +65,7 @@ export class GameManagerComponent {
         ],
       },
       {
-        imageUrl: 'https://picsum.photos/200?random=1',
+        imageUrl: 'https://picsum.photos/200?random=2',
         title: 'Title Question 2',
         questions: [
           'The question 2.1',
@@ -185,6 +187,48 @@ export class GameManagerComponent {
       },
     ];
 
+    const enumerationQuizes: EnumerationQuiz[] = [
+      {
+        imageUrl: 'https://picsum.photos/200?random=6',
+        title: 'Title Picture 1',
+        questions: ['The picture 1'],
+        answers: ['The answer picture 1'],
+      },
+      {
+        imageUrl: 'https://picsum.photos/200?random=8',
+        title: 'Title Picture 2',
+        questions: ['The picture 2'],
+        answers: ['The answer picture 2'],
+      },
+      {
+        imageUrl: 'https://picsum.photos/200?random=10',
+        title: 'Title Picture 3',
+        questions: ['The picture 3'],
+        answers: ['The answer picture 3'],
+      },
+    ];
+
+    const drawQuizes: DrawQuiz[] = [
+      {
+        imageUrl: 'https://picsum.photos/200?random=11',
+        title: 'Title Draw 1',
+        questions: ['The draw 1'],
+        answers: ['The draw picture 1'],
+      },
+      {
+        imageUrl: 'https://picsum.photos/200?random=12',
+        title: 'Title Draw 2',
+        questions: ['The draw 2'],
+        answers: ['The draw picture 2'],
+      },
+      {
+        imageUrl: 'https://picsum.photos/200?random=13',
+        title: 'Title Draw 3',
+        questions: ['The draw 3'],
+        answers: ['The draw picture 3'],
+      },
+    ];
+
     this.game = {
       rounds: [
         /*{
@@ -202,10 +246,20 @@ export class GameManagerComponent {
           type: QuizType.Picture,
           quizes: pictureQuizes,
         },*/
-        {
+        /*{
           title: 'Simple Pictos',
           type: QuizType.Picto,
           quizes: pictoQuizes,
+        },*/
+        /*{
+          title: 'Simple Enumeration',
+          type: QuizType.Enumeration,
+          quizes: enumerationQuizes,
+        },*/
+        {
+          title: 'Simple Draw',
+          type: QuizType.Draw,
+          quizes: drawQuizes,
         },
       ],
     };
@@ -376,6 +430,42 @@ export class GameManagerComponent {
     }
 
     return this.currentQuiz$.value as PictoQuiz;
+  };
+
+  public getCurrentQuizAsEnumeration = (): EnumerationQuiz | undefined => {
+    if (!this.currentRound$.value) {
+      console.log('Checking type of current round, but its value if falsy.');
+      return undefined;
+    }
+
+    if (!this.currentQuiz$.value) {
+      console.log('Checking type of current quiz, but its value if falsy.');
+      return undefined;
+    }
+
+    if (this.currentRound$.value.type !== QuizType.Enumeration) {
+      return undefined;
+    }
+
+    return this.currentQuiz$.value as EnumerationQuiz;
+  };
+
+  public getCurrentQuizAsDraw = (): DrawQuiz | undefined => {
+    if (!this.currentRound$.value) {
+      console.log('Checking type of current round, but its value if falsy.');
+      return undefined;
+    }
+
+    if (!this.currentQuiz$.value) {
+      console.log('Checking type of current quiz, but its value if falsy.');
+      return undefined;
+    }
+
+    if (this.currentRound$.value.type !== QuizType.Draw) {
+      return undefined;
+    }
+
+    return this.currentQuiz$.value as DrawQuiz;
   };
 
   public isCurrentGameStartState = (): boolean => {

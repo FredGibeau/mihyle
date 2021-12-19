@@ -3,7 +3,8 @@ import { PictoQuiz } from '../../interfaces/picto.interface';
 
 @Component({
   selector: 'mihyle-picto-quiz',
-  templateUrl: 'picto-quiz.component.html',
+  templateUrl: './picto-quiz.component.html',
+  styleUrls: ['./picto-quiz.component.scss'],
 })
 export class PictoQuizComponent {
   @Input()

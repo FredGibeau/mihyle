@@ -31,6 +31,18 @@
           [questionIndex]="currentQuestionIndex$ | async"
         ></mihyle-picto-quiz>
       </ng-template>
+      <ng-template [ngIf]="getCurrentQuizAsEnumeration()">
+        <mihyle-enumeration-quiz
+          [enumerationQuiz]="getCurrentQuizAsEnumeration()"
+          [questionIndex]="currentQuestionIndex$ | async"
+        ></mihyle-enumeration-quiz>
+      </ng-template>
+      <ng-template [ngIf]="getCurrentQuizAsDraw()">
+        <mihyle-draw-quiz
+          [drawQuiz]="getCurrentQuizAsDraw()"
+          [questionIndex]="currentQuestionIndex$ | async"
+        ></mihyle-draw-quiz>
+      </ng-template>
     </ng-template>
     <ng-template [ngIf]="isCurrentGameEndRoundState()">
       <p>Round End!</p>
