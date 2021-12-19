@@ -8,6 +8,15 @@ export interface IRound {
   title: string;
   type: QuizType;
   quizes: Quiz[];
+  timer: ITimer;
+}
+
+export interface ITimer {
+  seconds: number;
+  goNextIndexOnTimerEnds: boolean;
+  goNextQuestionOnTimerEnds: boolean;
+  failOnTimerEnds: boolean;
+  autoStart: boolean;
 }
 
 export enum GameStateType {

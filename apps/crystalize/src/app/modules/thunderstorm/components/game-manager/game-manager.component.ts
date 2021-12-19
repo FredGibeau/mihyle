@@ -1,5 +1,12 @@
-import { Component } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import {
+  BehaviorSubject,
+  filter,
+  interval,
+  Subject,
+  takeUntil,
+  timer,
+} from 'rxjs';
 import { DrawQuiz } from '../../interfaces/draw-interface';
 import { EnumerationQuiz } from '../../interfaces/enumeration.interface';
 import {
@@ -20,6 +27,10 @@ import { Quiz, QuizType } from '../../interfaces/quiz.interface';
 })
 export class GameManagerComponent {
   private game: IGame;
+
+  isTimerActive = false;
+  timer: number | undefined | null = undefined;
+  timerEnds$: Subject<void> | undefined | null = undefined;
 
   currentGameState$: BehaviorSubject<GameStateType> =
     new BehaviorSubject<GameStateType>(GameStateType.StartGame);
@@ -231,11 +242,18 @@ export class GameManagerComponent {
 
     this.game = {
       rounds: [
-        /*{
+        {
           title: 'Simple Questions!',
           type: QuizType.Question,
           quizes: questionQuizes,
-        },*/
+          timer: {
+            seconds: 20,
+            autoStart: false,
+            goNextIndexOnTimerEnds: false,
+            goNextQuestionOnTimerEnds: false,
+            failOnTimerEnds: true,
+          },
+        },
         /*{
           title: 'Simple Karaokes!',
           type: QuizType.Karaoke,
@@ -256,11 +274,11 @@ export class GameManagerComponent {
           type: QuizType.Enumeration,
           quizes: enumerationQuizes,
         },*/
-        {
+        /*{
           title: 'Simple Draw',
           type: QuizType.Draw,
           quizes: drawQuizes,
-        },
+        },*/
       ],
     };
 
@@ -274,8 +292,61 @@ export class GameManagerComponent {
     this.currentQuestionIndex$.next(null);
   };
 
+  private startTimer(): void {
+    if (!this.timer) {
+      console.log('Trying to start timer, but timer is undefined.');
+
+      return;
+    }
+
+    if (!this.timerEnds$) {
+      console.log('Trying to start timer, but timer end is undefined.');
+
+      return;
+    }
+
+    interval(1000)
+      .pipe(takeUntil(this.timerEnds$))
+      .subscribe(() => {
+        if (!this.timer) {
+          console.log('Timer passed in the subscribe, but timer is undefined.');
+          return;
+        }
+
+        this.isTimerActive = true;
+        --this.timer;
+
+        if (this.timer === 0) {
+          if (!this.timerEnds$) {
+            console.log(
+              'Tried to end the timer, but the timerEnds subject is undefined.'
+            );
+            return;
+          }
+
+          this.timerEnds$.next();
+          this.timerEnds$.complete();
+          this.timer = null;
+          this.timerEnds$ = null;
+          this.isTimerActive = false;
+        }
+      });
+  }
+
+  private initializeTimer(seconds: number): void {
+    this.timer = seconds;
+
+    if (this.timerEnds$) {
+      this.timerEnds$.next();
+      this.timerEnds$.complete();
+      this.isTimerActive = false;
+    }
+
+    this.timerEnds$ = new Subject<void>();
+  }
+
   // TODO Game State Service
-  OnClickNext = (): void => {
+  public OnClickNext = (): void => {
     if (this.currentGameState$.value === GameStateType.StartGame) {
       this.currentRound$.next(this.game.rounds[0]);
       this.currentGameState$.next(GameStateType.StartRound);
@@ -284,6 +355,11 @@ export class GameManagerComponent {
         this.currentQuiz$.next(this.currentRound$.value.quizes[0]);
         this.currentQuestionIndex$.next(0);
         this.currentGameState$.next(GameStateType.Quiz);
+        console.log('Next Quiz ! ');
+        this.initializeTimer(this.currentRound$.value.timer.seconds);
+        if (this.currentRound$.value.timer.autoStart) {
+          this.startTimer();
+        }
       } else {
         console.log(
           'The game was in a RoundState, but the current round was empty.'
@@ -323,6 +399,10 @@ export class GameManagerComponent {
         this.currentQuiz$.value.questions.length - 1
       ) {
         this.currentQuestionIndex$.next(this.currentQuestionIndex$.value + 1);
+        this.initializeTimer(this.currentRound$.value.timer.seconds);
+        if (this.currentRound$.value.timer.autoStart) {
+          this.startTimer();
+        }
       } else {
         const currentQuizIndex = this.currentRound$.value.quizes.indexOf(
           this.currentQuiz$.value
@@ -487,4 +567,17 @@ export class GameManagerComponent {
   public isCurrentGameEndGameState = (): boolean => {
     return this.currentGameState$.value === GameStateType.EndGame;
   };
+
+  public onTimerClick(): void {
+    if (!this.currentRound$.value) {
+      console.log(
+        'Tried to start the timer, but the current round is undefined.'
+      );
+      return;
+    }
+
+    if (!this.isTimerActive) {
+      this.startTimer();
+    }
+  }
 }
