@@ -12,6 +12,7 @@ import { PictoQuiz } from '../../interfaces/picto.interface';
 import { PictureQuiz } from '../../interfaces/picture.interface';
 import { QuestionQuiz } from '../../interfaces/question.interface';
 import { Quiz, QuizType } from '../../interfaces/quiz.interface';
+import { ScoreService } from '../../services/score.service';
 import { TimerService } from '../../services/timer.service';
 
 @Component({
@@ -35,7 +36,10 @@ export class GameManagerComponent {
   currentQuestionIndex$: BehaviorSubject<number | undefined | null> =
     new BehaviorSubject<number | undefined | null>(undefined);
 
-  constructor(public timerService: TimerService) {
+  constructor(
+    public timerService: TimerService,
+    public scoreService: ScoreService
+  ) {
     const questionQuizes: QuestionQuiz[] = [
       {
         imageUrl: 'https://picsum.photos/200?random=1',
@@ -71,6 +75,7 @@ export class GameManagerComponent {
         imageUrl: 'https://picsum.photos/200?random=2',
         title: 'Title Question 2',
         questions: [
+          '',
           'The question 2.1',
           'The question 2.2',
           'The question 2.3',
@@ -83,6 +88,7 @@ export class GameManagerComponent {
           'The question 2.10',
         ],
         answers: [
+          '',
           'The answer 2.1',
           'The answer 2.2',
           'The answer 2.3',
@@ -521,5 +527,23 @@ export class GameManagerComponent {
     }
 
     this.timerService.initializeTimer(this.currentRound$.value.timer.seconds);
+  }
+
+  public onRedTeamScoreClick(): void {
+    ++this.scoreService.teamRedScore;
+  }
+
+  public onRedTeamScoreContext(event: Event): void {
+    --this.scoreService.teamRedScore;
+    event.preventDefault();
+  }
+
+  public onGreenTeamScoreClick(): void {
+    ++this.scoreService.teamGreenScore;
+  }
+
+  public onGreenTeamScoreContext(event: Event): void {
+    --this.scoreService.teamGreenScore;
+    event.preventDefault();
   }
 }

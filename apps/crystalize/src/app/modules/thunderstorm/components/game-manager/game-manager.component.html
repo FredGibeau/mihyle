@@ -53,5 +53,17 @@
     <button (click)="OnClickNext()">Next</button>
     <button (click)="onTimerClick()">{{ timerService.timer }}</button>
     <button (click)="onResetTimerClick()">Reset Timer</button>
+    <button
+      (click)="onRedTeamScoreClick()"
+      (contextmenu)="onRedTeamScoreContext($event)"
+    >
+      {{ scoreService.teamRedScore }}
+    </button>
+    <button
+      (click)="onGreenTeamScoreClick()"
+      (contextmenu)="onGreenTeamScoreContext($event)"
+    >
+      {{ scoreService.teamGreenScore }}
+    </button>
   </div>
 </div>
