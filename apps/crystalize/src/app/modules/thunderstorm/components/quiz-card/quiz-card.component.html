@@ -1,28 +1,46 @@
 <ng-container *ngIf="quiz; else noQuiz">
-  <div class="w-screen-50 py-4 px-8 bg-white shadow-lg rounded-lg my-20">
-    <div class="flex justify-center md:justify-end -mt-16">
-      <img
-        class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500"
-        [src]="quiz.imageUrl"
-      />
+  <ng-container *ngIf="questionIndex !== undefined; else noQuestionIndex">
+    <div class="w-screen-30 h-[80vh] flex flex-col">
+      <div class="flex justify-end"></div>
+      <div class="py-4 px-8 flex flex-row justify-center">
+        <div class="w-full">
+          <h2 class="text-6xl font-grinched mb-10 text-center">
+            {{ quiz.title }}
+          </h2>
+          <ng-content></ng-content>
+        </div>
+      </div>
+      <div>
+        <p
+          [ngClass]="{ 'font-grinched': !usesFallbackFont }"
+          class="mt-2 text-5xl font-grinched {{
+            usesFallbackFont ? 'font-grinched' : ''
+          }}"
+        >
+          {{ visibleBody }}
+        </p>
+      </div>
+      <ng-container *ngIf="quiz.answers">
+        <div *ngIf="quiz.answers[questionIndex]" class="flex mt-4">
+          <div class="bg-candyCane rounded-full w-72 p-1 box-shadow">
+            <button
+              class="bg-candy-red rounded-full w-full p-1 text-5xl text-grinch-green font-grinched border-4 border-candy-red text-shadow"
+              (click)="onInteractionButton()"
+            >
+              {{ interactionText }}
+            </button>
+          </div>
+        </div>
+      </ng-container>
     </div>
-    <div>
-      <h2 class="text-gray-800 text-3xl font-semibold">{{ quiz.title }}</h2>
-      <ng-content></ng-content>
-      <p class="mt-2 text-gray-600">
-        {{ visibleBody }}
-      </p>
-    </div>
-    <div class="flex justify-end mt-4">
-      <button
-        class="text-xl font-medium text-indigo-500"
-        (click)="onInteractionButton()"
-      >
-        {{ interactionText }}
-      </button>
-    </div>
-  </div>
+  </ng-container>
 </ng-container>
 <ng-template #noQuiz>
   <p>No quiz found in QuizCard component, please pass one from the input.</p>
+</ng-template>
+<ng-template #noQuestionIndex>
+  <p>
+    No question index found in QuizCard component, please pass one from the
+    input.
+  </p>
 </ng-template>

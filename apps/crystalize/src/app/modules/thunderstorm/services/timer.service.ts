@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { interval, Subject, takeUntil } from 'rxjs';
+import { interval, startWith, Subject, takeUntil } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +26,7 @@ export class TimerService {
     }
 
     interval(1000)
+      .pipe(startWith(0))
       .pipe(takeUntil(this.timerEnds$))
       .subscribe(() => {
         if (!this.timer) {
@@ -46,7 +47,7 @@ export class TimerService {
 
           this.timerEnds$.next();
           this.timerEnds$.complete();
-          this.timer = null;
+          this.timer = 0;
           this.timerEnds$ = null;
           this.isTimerActive = false;
         }
@@ -63,5 +64,16 @@ export class TimerService {
     }
 
     this.timerEnds$ = new Subject<void>();
+  }
+
+  public removeTimer(): void {
+    if (this.timerEnds$) {
+      this.timerEnds$.next();
+      this.timerEnds$.complete();
+    }
+
+    this.timer = null;
+    this.timerEnds$ = null;
+    this.isTimerActive = false;
   }
 }

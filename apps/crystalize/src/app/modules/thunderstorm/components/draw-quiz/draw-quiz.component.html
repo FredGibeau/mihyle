@@ -7,7 +7,10 @@
       "
     >
       <mihyle-quiz-card [quiz]="drawQuiz" [questionIndex]="questionIndex">
-        <canvas #canvas class="w-[{{ width }}px] h-[{{ height }}px]"></canvas>
+        <canvas
+          #canvas
+          class="w-[{{ width }}px] h-[{{ height }}px] bg-white"
+        ></canvas>
       </mihyle-quiz-card>
     </ng-container>
   </ng-container>

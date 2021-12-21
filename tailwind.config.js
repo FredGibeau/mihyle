@@ -3,34 +3,23 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      colors: {
+        'candy-red': '#D2042D',
+        'grinch-green': '#87c519',
+      },
       width: {
         'screen-50': '50vw',
+        'screen-30': '30vw',
       },
-      animation: {
-        blur: 'blur 20s ease-in-out infinite',
-        unblur: 'unblur 20s ease-in-out',
+      backgroundImage: {
+        background: 'url(./assets/grinch.jpg)',
+        candyCane:
+          'repeating-linear-gradient(45deg, #fff, #fff 10px, #D2042D 10px, #D2042D 20px)',
       },
-      keyframes: {
-        blur: {
-          '0%': {
-            filter: 'blur(0px)',
-          },
-          '100%': {
-            filter: 'blur(50px)',
-          },
-        },
-        unblur: {
-          '0%': {
-            filter: 'blur(50px)',
-          },
-          '100%': {
-            filter: 'blur(0px)',
-          },
-        },
-      },
+      background: {},
     },
     fontFamily: {
-      body: ['"Source Serif Pro"', 'serif'],
+      grinched: ['"Grinched 2.0"'],
     },
   },
   variants: {

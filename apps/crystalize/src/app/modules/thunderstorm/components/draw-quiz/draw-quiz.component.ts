@@ -17,8 +17,8 @@ import { DrawQuiz } from '../../interfaces/draw-interface';
   templateUrl: './draw-quiz.component.html',
 })
 export class DrawQuizComponent implements AfterViewInit, OnChanges, OnDestroy {
-  width = 500;
-  height = 500;
+  width = 550;
+  height = 550;
 
   @Input()
   drawQuiz: DrawQuiz | undefined = undefined;

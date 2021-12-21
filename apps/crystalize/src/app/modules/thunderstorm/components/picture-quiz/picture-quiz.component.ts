@@ -44,9 +44,9 @@ export class PictureQuizComponent implements AfterViewInit, OnChanges {
 
     const animation = this.animationBuilder.build([
       style({
-        filter: 'blur(50px)',
+        filter: 'blur(30px)',
       }),
-      animate('3s', style({ filter: 'blur(0px)' })),
+      animate('10s', style({ filter: 'blur(0px)' })),
     ]);
 
     this.animationPlayer = animation.create(this.picture.nativeElement);

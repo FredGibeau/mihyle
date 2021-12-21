@@ -53,8 +53,8 @@ export class KaraokeQuizComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     this.player = new window['YT'].Player('player', {
-      height: '390',
-      width: '640',
+      height: '600',
+      width: '900',
       videoId: this.karaokeQuiz?.youtubeVideoId,
       playerVars: {
         playsinline: 1,

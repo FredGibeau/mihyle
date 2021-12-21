@@ -1,11 +1,46 @@
-<div class="bg-gray-200 w-screen h-screen">
-  <div class="flex justify-center h-full items-center">
-    <ng-template [ngIf]="isCurrentGameStartState()">
-      <p>Game Start!</p>
-    </ng-template>
-    <ng-template [ngIf]="isCurrentGameStartRoundState()">
-      <p>Round Start!</p>
-    </ng-template>
+<div class="bg-background bg-no-repeat bg-cover bg-right w-screen h-screen">
+  <div class="flex flex-col h-full w-[50%] justify-center items-center">
+    <div
+      *ngIf="currentRound$.value"
+      class="flex flex-row justify-between w-full"
+    >
+      <div class="flex flex-col items-center w-72">
+        <div class="bg-candyCane rounded-full w-40 p-1 box-shadow">
+          <button
+            class="bg-candy-red rounded-full w-full p-1 text-5xl text-grinch-green font-grinched border-4 border-candy-red text-shadow"
+            (click)="onRedTeamScoreClick()"
+            (contextmenu)="onRedTeamScoreContext($event)"
+          >
+            {{ scoreService.teamRedScore }}
+          </button>
+        </div>
+        <p class="font-grinched text-4xl">Team GRINCH</p>
+      </div>
+      <div
+        *ngIf="timerService.timer"
+        class="bg-candyCane p-1 rounded-full box-shadow"
+      >
+        <button
+          class="w-36 h-36 rounded-full bg-candy-red flex justify-center items-center text-8xl font-extrabold text-grinch-green font-grinched text-shadow"
+          (click)="onTimerClick()"
+          (contextmenu)="onResetTimerClick($event)"
+        >
+          {{ timerService.timer }}
+        </button>
+      </div>
+      <div class="flex flex-col items-center w-72">
+        <div class="bg-candyCane rounded-full w-40 p-1 box-shadow">
+          <button
+            class="bg-candy-red rounded-full w-full p-1 text-5xl text-grinch-green font-grinched border-4 border-candy-red text-shadow"
+            (click)="onGreenTeamScoreClick()"
+            (contextmenu)="onGreenTeamScoreContext($event)"
+          >
+            {{ scoreService.teamGreenScore }}
+          </button>
+        </div>
+        <p class="font-grinched text-4xl">Team MAX</p>
+      </div>
+    </div>
     <ng-template [ngIf]="isCurrentGameQuizState()">
       <ng-template [ngIf]="getCurrentQuizAsQuestion()">
         <mihyle-question-quiz
@@ -44,26 +79,24 @@
         ></mihyle-draw-quiz>
       </ng-template>
     </ng-template>
-    <ng-template [ngIf]="isCurrentGameEndRoundState()">
-      <p>Round End!</p>
+    <ng-template [ngIf]="isCurrentGameStartRoundState()">
+      <p *ngIf="currentRound$.value" class="font-grinched text-6xl mb-10">
+        {{ currentRound$.value.title }}
+      </p>
+    </ng-template>
+    <!--<ng-template [ngIf]="isCurrentGameEndRoundState()">
+      <p class="font-grinched font-semibold text-6xl">Round End!</p>
     </ng-template>
     <ng-template [ngIf]="isCurrentGameEndGameState()">
-      <p>Game End!</p>
-    </ng-template>
-    <button (click)="OnClickNext()">Next</button>
-    <button (click)="onTimerClick()">{{ timerService.timer }}</button>
-    <button (click)="onResetTimerClick()">Reset Timer</button>
-    <button
-      (click)="onRedTeamScoreClick()"
-      (contextmenu)="onRedTeamScoreContext($event)"
-    >
-      {{ scoreService.teamRedScore }}
-    </button>
-    <button
-      (click)="onGreenTeamScoreClick()"
-      (contextmenu)="onGreenTeamScoreContext($event)"
-    >
-      {{ scoreService.teamGreenScore }}
-    </button>
+      <p class="font-grinched font-semibold text-6xl">Game End!</p>
+    </ng-template>-->
+    <div class="bg-candyCane rounded-full p-1 box-shadow">
+      <button
+        class="bg-candy-red rounded-full w-full px-6 py-1 text-5xl text-grinch-green font-grinched border-4 border-candy-red text-shadow"
+        (click)="OnClickNext()"
+      >
+        {{ nextButtonText }}
+      </button>
+    </div>
   </div>
 </div>

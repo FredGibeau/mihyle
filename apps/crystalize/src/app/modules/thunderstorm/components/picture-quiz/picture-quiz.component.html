@@ -8,8 +8,9 @@
     >
       <mihyle-quiz-card [quiz]="pictureQuiz" [questionIndex]="questionIndex">
         <img
+          class="w-full object-cover"
           #picture
-          [src]="pictureQuiz.imageUrl"
+          [src]="pictureQuiz.pictureUrl"
           alt="picture_quiz"
           (mouseover)="pauseAnimation()"
           (mouseleave)="resumeAnimation()"

@@ -21,6 +21,9 @@ import { TimerService } from '../../services/timer.service';
   styleUrls: ['./game-manager.component.scss'],
 })
 export class GameManagerComponent {
+  private readonly googleDriveBase =
+    'https://drive.google.com/uc?export=view&id=';
+
   private game: IGame;
 
   currentGameState$: BehaviorSubject<GameStateType> =
@@ -36,13 +39,15 @@ export class GameManagerComponent {
   currentQuestionIndex$: BehaviorSubject<number | undefined | null> =
     new BehaviorSubject<number | undefined | null>(undefined);
 
+  nextButtonText = 'Start Game';
+
   constructor(
     public timerService: TimerService,
     public scoreService: ScoreService
   ) {
     const questionQuizes: QuestionQuiz[] = [
       {
-        imageUrl: 'https://picsum.photos/200?random=1',
+        timer: { seconds: 20 },
         title: 'Title Question 1',
         questions: [
           '',
@@ -72,7 +77,7 @@ export class GameManagerComponent {
         ],
       },
       {
-        imageUrl: 'https://picsum.photos/200?random=2',
+        timer: { seconds: 20 },
         title: 'Title Question 2',
         questions: [
           '',
@@ -105,12 +110,12 @@ export class GameManagerComponent {
 
     const karaokeQuizes: KaraokeQuiz[] = [
       {
-        imageUrl: 'https://picsum.photos/200?random=4',
+        timer: { seconds: 20 },
         title: 'Title Karaoke 1',
         youtubeVideoId: 'E05SSymMvdY',
         timestampsSeconds: [3, 5, 10, 160],
         questions: [
-          '______ ____ _______',
+          '_________ ____ _______',
           '______ ____ _______ ______',
           '______ ____ _______ _______ ________',
           'Enjoy the rest of the song !',
@@ -123,7 +128,7 @@ export class GameManagerComponent {
         ],
       },
       {
-        imageUrl: 'https://picsum.photos/200?random=5',
+        timer: { seconds: 20 },
         title: 'Title Karaoke 2',
         youtubeVideoId: 'woFTMwLJilI',
         timestampsSeconds: [5, 10, 12],
@@ -138,23 +143,23 @@ export class GameManagerComponent {
 
     const pictureQuizes: PictureQuiz[] = [
       {
-        imageUrl: 'https://picsum.photos/200?random=6',
+        timer: { seconds: 20 },
         title: 'Title Picture 1',
-        questions: ['The picture 1'],
+        questions: [''],
         answers: ['The answer picture 1'],
         pictureUrl: 'https://picsum.photos/200/300?random=7',
       },
       {
-        imageUrl: 'https://picsum.photos/200?random=8',
+        timer: { seconds: 20 },
         title: 'Title Picture 2',
-        questions: ['The picture 2'],
+        questions: [''],
         answers: ['The answer picture 2'],
         pictureUrl: 'https://picsum.photos/200/300?random=9',
       },
       {
-        imageUrl: 'https://picsum.photos/200?random=10',
+        timer: { seconds: 20 },
         title: 'Title Picture 3',
-        questions: ['The picture 3'],
+        questions: [''],
         answers: ['The answer picture 3'],
         pictureUrl: 'https://picsum.photos/200/300?random=11',
       },
@@ -162,92 +167,609 @@ export class GameManagerComponent {
 
     const pictoQuizes: PictoQuiz[] = [
       {
-        imageUrl: 'https://picsum.photos/200?random=12',
-        title: 'Title Picture 1',
-        questions: ['The picture 1'],
-        answers: ['The answer picture 1'],
-        pictosUrl: [
-          'https://picsum.photos/200/300?random=13',
-          'https://picsum.photos/200/300?random=14',
-        ],
+        timer: { seconds: 20 },
+        title: 'Personnage',
+        questions: [],
+        answers: ['Adam et Eve'],
+        pictosUrl: [this.googleDriveBase + '16Y3Tnmf5dk0qydqgMNe7-luEdkaKJhm7'],
       },
       {
-        imageUrl: 'https://picsum.photos/200?random=15',
-        title: 'Title Picture 2',
-        questions: ['The picture 2'],
-        answers: ['The answer picture 2'],
-        pictosUrl: [
-          'https://picsum.photos/200/300?random=16',
-          'https://picsum.photos/200/300?random=17',
-          'https://picsum.photos/200/300?random=18',
-        ],
+        timer: { seconds: 20 },
+        title: 'Oeuvre',
+        questions: [],
+        answers: ['Alice aux Pays des Merveilles'],
+        pictosUrl: [this.googleDriveBase + '19ZeJZr_FXw2JI7UrRcCm0sQ4qKPveNFc'],
       },
       {
-        imageUrl: 'https://picsum.photos/200?random=19',
-        title: 'Title Picture 3',
-        questions: ['The picture 3'],
-        answers: ['The answer picture 3'],
-        pictosUrl: [
-          'https://picsum.photos/200/300?random=20',
-          'https://picsum.photos/200/300?random=21',
-          'https://picsum.photos/200/300?random=22',
-          'https://picsum.photos/200/300?random=23',
-        ],
+        timer: { seconds: 20 },
+        title: 'Phenomene',
+        questions: [''],
+        answers: ['Arc en ciel'],
+        pictosUrl: [this.googleDriveBase + '17oXrOEDMvx_RetzaRxSmvD8csCQ9oPGE'],
+      },
+      {
+        timer: { seconds: 20 },
+        title: 'Chanson',
+        questions: [''],
+        answers: ['Au Clair de la Lune'],
+        pictosUrl: [this.googleDriveBase + '1F7PXoHpt3PXAvmZGE4jZIZoU_BQ9feOW'],
+      },
+      {
+        timer: { seconds: 20 },
+        title: 'Expression',
+        questions: [''],
+        answers: ['Au plus fort de la poche'],
+        pictosUrl: [this.googleDriveBase + '1Wvt6K63ZzKK3fkKL-6insiENIOVoAT_c'],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
+      },
+      {
+        timer: { seconds: 20 },
+        title: '',
+        questions: [''],
+        answers: [''],
+        pictosUrl: [this.googleDriveBase + ''],
       },
     ];
 
     const enumerationQuizes: EnumerationQuiz[] = [
       {
-        imageUrl: 'https://picsum.photos/200?random=6',
+        timer: { seconds: 20 },
         title: 'Title Picture 1',
-        questions: ['The picture 1'],
-        answers: ['The answer picture 1'],
+        questions: [''],
+        answers: [''],
       },
       {
-        imageUrl: 'https://picsum.photos/200?random=8',
+        timer: { seconds: 20 },
         title: 'Title Picture 2',
-        questions: ['The picture 2'],
-        answers: ['The answer picture 2'],
+        questions: [''],
+        answers: [''],
       },
       {
-        imageUrl: 'https://picsum.photos/200?random=10',
+        timer: { seconds: 20 },
         title: 'Title Picture 3',
-        questions: ['The picture 3'],
-        answers: ['The answer picture 3'],
+        questions: [''],
+        answers: [''],
       },
     ];
 
     const drawQuizes: DrawQuiz[] = [
       {
-        imageUrl: 'https://picsum.photos/200?random=11',
+        timer: { seconds: 20 },
         title: 'Title Draw 1',
-        questions: ['The draw 1'],
-        answers: ['The draw picture 1'],
+        questions: [],
+        answers: [],
       },
       {
-        imageUrl: 'https://picsum.photos/200?random=12',
+        timer: { seconds: 20 },
         title: 'Title Draw 2',
-        questions: ['The draw 2'],
-        answers: ['The draw picture 2'],
+        questions: [],
+        answers: [],
       },
       {
-        imageUrl: 'https://picsum.photos/200?random=13',
+        timer: { seconds: 20 },
         title: 'Title Draw 3',
-        questions: ['The draw 3'],
-        answers: ['The draw picture 3'],
+        questions: [],
+        answers: [],
       },
     ];
 
     this.game = {
       rounds: [
-        {
+        /*{
           title: 'Simple Questions!',
           type: QuizType.Question,
           quizes: questionQuizes,
-          timer: {
-            seconds: 20,
-          },
-        },
+        },*/
         /*{
           title: 'Simple Karaokes!',
           type: QuizType.Karaoke,
@@ -258,11 +780,11 @@ export class GameManagerComponent {
           type: QuizType.Picture,
           quizes: pictureQuizes,
         },*/
-        /*{
+        {
           title: 'Simple Pictos',
           type: QuizType.Picto,
           quizes: pictoQuizes,
-        },*/
+        },
         /*{
           title: 'Simple Enumeration',
           type: QuizType.Enumeration,
@@ -284,6 +806,8 @@ export class GameManagerComponent {
     this.currentRound$.next(null);
     this.currentQuiz$.next(null);
     this.currentQuestionIndex$.next(null);
+    this.scoreService.teamGreenScore = 0;
+    this.scoreService.teamRedScore = 0;
   };
 
   // TODO Game State Service
@@ -291,15 +815,17 @@ export class GameManagerComponent {
     if (this.currentGameState$.value === GameStateType.StartGame) {
       this.currentRound$.next(this.game.rounds[0]);
       this.currentGameState$.next(GameStateType.StartRound);
+      this.nextButtonText = 'Start Round';
     } else if (this.currentGameState$.value === GameStateType.StartRound) {
       if (this.currentRound$.value) {
-        this.currentQuiz$.next(this.currentRound$.value.quizes[0]);
+        const nextQuiz = this.currentRound$.value.quizes[0];
+        this.currentQuiz$.next(nextQuiz);
         this.currentQuestionIndex$.next(0);
         this.currentGameState$.next(GameStateType.Quiz);
-        console.log('Next Quiz ! ');
-        this.timerService.initializeTimer(
-          this.currentRound$.value.timer.seconds
-        );
+        this.nextButtonText = 'Next Question';
+        if (nextQuiz.timer) {
+          this.timerService.initializeTimer(nextQuiz.timer.seconds);
+        }
       } else {
         console.log(
           'The game was in a RoundState, but the current round was empty.'
@@ -339,9 +865,12 @@ export class GameManagerComponent {
         this.currentQuiz$.value.questions.length - 1
       ) {
         this.currentQuestionIndex$.next(this.currentQuestionIndex$.value + 1);
-        this.timerService.initializeTimer(
-          this.currentRound$.value.timer.seconds
-        );
+
+        if (this.currentQuiz$.value.timer) {
+          this.timerService.initializeTimer(
+            this.currentQuiz$.value.timer.seconds
+          );
+        }
       } else {
         const currentQuizIndex = this.currentRound$.value.quizes.indexOf(
           this.currentQuiz$.value
@@ -349,11 +878,17 @@ export class GameManagerComponent {
 
         if (currentQuizIndex >= this.currentRound$.value.quizes.length - 1) {
           this.currentGameState$.next(GameStateType.EndRound);
+          this.timerService.removeTimer();
+          this.nextButtonText = 'Finish Round';
         } else {
-          this.currentQuiz$.next(
-            this.currentRound$.value.quizes[currentQuizIndex + 1]
-          );
+          const nextQuiz =
+            this.currentRound$.value.quizes[currentQuizIndex + 1];
+          this.currentQuiz$.next(nextQuiz);
           this.currentQuestionIndex$.next(0);
+
+          if (nextQuiz.timer) {
+            this.timerService.initializeTimer(nextQuiz.timer.seconds);
+          }
         }
       }
     } else if (this.currentGameState$.value === GameStateType.EndRound) {
@@ -370,11 +905,14 @@ export class GameManagerComponent {
 
       if (currentRoundIndex >= this.game.rounds.length - 1) {
         this.currentGameState$.next(GameStateType.EndGame);
+        this.nextButtonText = 'End Game';
       } else {
         this.currentRound$.next(this.game.rounds[currentRoundIndex + 1]);
         this.currentGameState$.next(GameStateType.StartRound);
+        this.nextButtonText = 'Start Round';
       }
     } else if (this.currentGameState$.value === GameStateType.EndGame) {
+      this.nextButtonText = 'Start Game';
       this.initializeGame();
     }
   };
@@ -507,28 +1045,6 @@ export class GameManagerComponent {
     return this.currentGameState$.value === GameStateType.EndGame;
   };
 
-  public onTimerClick(): void {
-    if (!this.currentRound$.value) {
-      console.log(
-        'Tried to start the timer, but the current round is undefined.'
-      );
-      return;
-    }
-
-    this.timerService.startTimer();
-  }
-
-  public onResetTimerClick(): void {
-    if (!this.currentRound$.value) {
-      console.log(
-        'Tried to reset the timer, but the current round is undefined.'
-      );
-      return;
-    }
-
-    this.timerService.initializeTimer(this.currentRound$.value.timer.seconds);
-  }
-
   public onRedTeamScoreClick(): void {
     ++this.scoreService.teamRedScore;
   }
@@ -544,6 +1060,27 @@ export class GameManagerComponent {
 
   public onGreenTeamScoreContext(event: Event): void {
     --this.scoreService.teamGreenScore;
+    event.preventDefault();
+  }
+
+  public onTimerClick(): void {
+    this.timerService.startTimer();
+  }
+
+  public onResetTimerClick(event: Event): void {
+    if (!this.currentQuiz$.value) {
+      console.log(
+        'Tried to reset the timer, but the current quiz is undefined.'
+      );
+      return;
+    }
+
+    if (!this.currentQuiz$.value.timer) {
+      console.log('Tried to reset the timer, but the timer is undefined.');
+      return;
+    }
+
+    this.timerService.initializeTimer(this.currentQuiz$.value.timer.seconds);
     event.preventDefault();
   }
 }

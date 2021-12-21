@@ -2,8 +2,8 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@layer utilities {
-  .animation-pause {
-    animation-play-state: paused;
-  }
+@font-face {
+  font-family: 'Grinched 2.0';
+  font-weight: 400;
+  src: url(./fonts/Grinched.otf);
 }

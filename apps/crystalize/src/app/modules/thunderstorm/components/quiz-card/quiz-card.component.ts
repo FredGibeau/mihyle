@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Quiz } from '../../interfaces/quiz.interface';
 
@@ -26,12 +20,41 @@ export class QuizCardComponent implements OnInit, OnChanges {
   visibleBody: string | undefined = undefined;
   interactionText: string | undefined = undefined;
 
+  usesFallbackFont = false;
+
   private onQuestionVisibleStateChange = (isQuestionVisible: boolean): void => {
     if (isQuestionVisible) {
       this.showQuiz();
     } else {
       this.showAnswer();
     }
+
+    if (!this.quiz) {
+      console.log(
+        'Trying to figure out wich font to use, but the quiz is null.'
+      );
+      return;
+    }
+
+    if (!this.quiz.questions) {
+      console.log(
+        'Trying to figure out wich font to use, but the questions are null.'
+      );
+      return;
+    }
+
+    if (this.questionIndex === undefined) {
+      console.log(
+        'Trying to figure out wich font to use, but the question index is null.'
+      );
+      return;
+    }
+
+    console.log('switch');
+
+    this.usesFallbackFont =
+      this.isQuestionVisibleState$.value &&
+      this.quiz.questions[this.questionIndex][0] === '_';
   };
 
   private showQuiz = (): void => {
@@ -95,6 +118,13 @@ export class QuizCardComponent implements OnInit, OnChanges {
 
   public ngOnChanges(): void {
     this.isQuestionVisibleState$.next(true);
+
+    if (!this.quiz) {
+      console.log(
+        "Trying to initialize the Quiz's timer, but Quiz is undefined."
+      );
+      return;
+    }
   }
 
   public onInteractionButton = (): void => {

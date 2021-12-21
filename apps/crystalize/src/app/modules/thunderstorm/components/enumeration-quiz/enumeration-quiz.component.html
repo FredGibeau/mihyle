@@ -10,11 +10,20 @@
         [quiz]="enumerationQuiz"
         [questionIndex]="questionIndex"
       >
-        <input
-          #input
-          *ngIf="!hasFailed; else failed"
-          (keydown.enter)="EnterSubmit()"
-        />
+        <div
+          [ngClass]="{
+            'justify-center': !hasFailed,
+            'justify-start': hasFailed
+          }"
+          class="flex"
+        >
+          <input
+            class="w-1/2 h-8"
+            #input
+            *ngIf="!hasFailed; else failed"
+            (keydown.enter)="EnterSubmit()"
+          />
+        </div>
       </mihyle-quiz-card>
     </ng-container>
   </ng-container>
@@ -32,7 +41,9 @@
   <p>No enumeration has been passed in Input of EnumerationComponent</p>
 </ng-template>
 <ng-template #failed>
-  <ul>
-    <li *ngFor="let enum of enumerations">{{ enum }}</li>
+  <ul class="">
+    <li *ngFor="let enum of enumerations" class="font-grinched text-3xl">
+      {{ enum }}
+    </li>
   </ul>
 </ng-template>
