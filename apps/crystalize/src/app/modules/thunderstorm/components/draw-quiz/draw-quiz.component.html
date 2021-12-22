@@ -10,6 +10,7 @@
         <canvas
           #canvas
           class="w-[{{ width }}px] h-[{{ height }}px] bg-white"
+          (contextmenu)="onRightClick($event)"
         ></canvas>
       </mihyle-quiz-card>
     </ng-container>

@@ -1,10 +1,10 @@
 <ng-container *ngIf="quiz; else noQuiz">
   <ng-container *ngIf="questionIndex !== undefined; else noQuestionIndex">
-    <div class="w-screen-30 h-[80vh] flex flex-col">
+    <div class="h-[65vh] mx-16 flex flex-col items-center">
       <div class="flex justify-end"></div>
-      <div class="py-4 px-8 flex flex-row justify-center">
+      <div class="py-2 flex flex-row justify-center">
         <div class="w-full">
-          <h2 class="text-6xl font-grinched mb-10 text-center">
+          <h2 class="text-[3.5rem] font-grinched text-center select-none">
             {{ quiz.title }}
           </h2>
           <ng-content></ng-content>
@@ -13,7 +13,7 @@
       <div>
         <p
           [ngClass]="{ 'font-grinched': !usesFallbackFont }"
-          class="mt-2 text-5xl font-grinched {{
+          class="text-[2.4rem] select-none font-grinched {{
             usesFallbackFont ? 'font-grinched' : ''
           }}"
         >
@@ -24,7 +24,7 @@
         <div *ngIf="quiz.answers[questionIndex]" class="flex mt-4">
           <div class="bg-candyCane rounded-full w-72 p-1 box-shadow">
             <button
-              class="bg-candy-red rounded-full w-full p-1 text-5xl text-grinch-green font-grinched border-4 border-candy-red text-shadow"
+              class="bg-candy-red rounded-full w-full p-1 text-5xl text-grinch-green font-grinched border-4 border-candy-red text-shadow select-none"
               (click)="onInteractionButton()"
             >
               {{ interactionText }}

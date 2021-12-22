@@ -17,8 +17,8 @@ import { DrawQuiz } from '../../interfaces/draw-interface';
   templateUrl: './draw-quiz.component.html',
 })
 export class DrawQuizComponent implements AfterViewInit, OnChanges, OnDestroy {
-  width = 550;
-  height = 550;
+  width = 380;
+  height = 380;
 
   @Input()
   drawQuiz: DrawQuiz | undefined = undefined;
@@ -98,21 +98,6 @@ export class DrawQuizComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
   }
 
-  public ngAfterViewInit(): void {
-    this.initializeDrawingCanvas();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (!changes.drawQuiz.isFirstChange()) {
-      this.cx?.clearRect(0, 0, this.width, this.height);
-    }
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
   private initializeDrawingCanvas() {
     if (!this.canvas) {
       console.log(
@@ -140,5 +125,29 @@ export class DrawQuizComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     // we'll implement this method to start capturing mouse events
     this.captureEvents(canvasEl);
+  }
+
+  private clear(): void {
+    this.cx?.clearRect(0, 0, this.width, this.height);
+  }
+
+  public ngAfterViewInit(): void {
+    this.initializeDrawingCanvas();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!changes.drawQuiz.isFirstChange()) {
+      this.clear();
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  public onRightClick($event: Event) {
+    this.clear();
+    $event.preventDefault();
   }
 }
