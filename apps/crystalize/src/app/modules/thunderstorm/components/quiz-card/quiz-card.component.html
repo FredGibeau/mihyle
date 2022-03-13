@@ -1,8 +1,8 @@
 <ng-container *ngIf="quiz; else noQuiz">
   <ng-container *ngIf="questionIndex !== undefined; else noQuestionIndex">
-    <div class="h-[65vh] mx-16 flex flex-col items-center">
+    <div class="h-[50vh] mx-16 flex flex-col items-center">
       <div class="flex justify-end"></div>
-      <div class="py-2 flex flex-row justify-center">
+      <div class="py-2">
         <div class="w-full">
           <h2 class="text-[3.5rem] font-grinched text-center select-none">
             {{ quiz.title }}
@@ -21,7 +21,7 @@
         </p>
       </div>
       <ng-container *ngIf="quiz.answers">
-        <div *ngIf="quiz.answers[questionIndex]" class="flex mt-4">
+        <div *ngIf="quiz.answers[questionIndex]" class="mt-4">
           <div class="bg-candyCane rounded-full w-72 p-1 box-shadow">
             <button
               class="bg-candy-red rounded-full w-full p-1 text-5xl text-grinch-green font-grinched border-4 border-candy-red text-shadow select-none"

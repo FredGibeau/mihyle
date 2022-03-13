@@ -6,8 +6,8 @@ import { particlesJS } from 'ng-particles';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
-  ngOnInit(): void {
+export class AppComponent /*implements OnInit*/ {
+  /*ngOnInit(): void {
     document.addEventListener('DOMContentLoaded', function () {
       const script = document.createElement('script');
       script.src =
@@ -73,5 +73,5 @@ export class AppComponent implements OnInit {
       };
       document.head.append(script);
     });
-  }
+  }*/
 }

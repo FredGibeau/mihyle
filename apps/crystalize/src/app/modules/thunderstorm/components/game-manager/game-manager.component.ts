@@ -18,6 +18,7 @@ import { EnumerationQuizes } from '../../constants/enumerations';
 import { DrawQuizes } from '../../constants/draws';
 import { QuestionQuizes } from '../../constants/questions';
 import { PictoQuizes } from '../../constants/pictos';
+import { PictureQuizes } from '../../constants/pictures';
 
 @Component({
   selector: 'mihyle-game-manager',
@@ -48,20 +49,25 @@ export class GameManagerComponent {
   ) {
     this.game = {
       rounds: [
-        {
+        /*{
           title: 'Tu Te Mets Combien_?',
           type: QuizType.Question,
           quizes: QuestionQuizes,
-        },
+        },*/
         {
-          title: 'Fais Toi une Idee',
-          type: QuizType.Picto,
-          quizes: PictoQuizes,
+          title: 'Connais tu tes Membres_?',
+          type: QuizType.Picture,
+          quizes: PictureQuizes,
         },
         {
           title: 'Patate Chaude',
           type: QuizType.Enumeration,
           quizes: EnumerationQuizes,
+        },
+        {
+          title: 'Fais Toi une Idee',
+          type: QuizType.Picto,
+          quizes: PictoQuizes,
         },
         {
           title: 'Dessins a Relais',

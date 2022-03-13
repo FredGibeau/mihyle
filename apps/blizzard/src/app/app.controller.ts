@@ -2,7 +2,9 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Multer } from 'multer';
 import {
+  Body,
   Controller,
+  Get,
   HttpException,
   HttpStatus,
   Post,
@@ -12,7 +14,16 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CropOptions, FilterService } from './filter.service';
-import { IsBoolean, IsNumber, IsOptional, Max, Min } from 'class-validator';
+import {
+  IsBase64,
+  IsBoolean,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Max,
+  Min,
+} from 'class-validator';
 import { Type } from 'class-transformer';
 
 // TODO Move this outside
@@ -59,7 +70,6 @@ class EnhanceImageDto {
   @IsOptional()
   toBuffer?: boolean = false;
 }
-
 @Controller()
 export class AppController {
   constructor(private readonly filterService: FilterService) {}

@@ -42,6 +42,6 @@ export class FilterService {
   bufferToImage(buffer: Buffer) {
     const b64 = Buffer.from(buffer).toString('base64');
     const mimeType = 'image/jpeg';
-    return `<img src="data:${mimeType};base64,${b64}" />`;
+    return `data:${mimeType};base64,${b64}`;
   }
 }

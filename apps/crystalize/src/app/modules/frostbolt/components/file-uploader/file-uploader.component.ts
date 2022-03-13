@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import axios from 'axios';
 
 @Component({
@@ -8,8 +9,9 @@ import axios from 'axios';
 })
 export class FileUploaderComponent {
   public parsedText: string | undefined;
+  public imageSrc: string | undefined;
 
-  constructor() {
+  constructor(private sanitazer: DomSanitizer) {
     this.parsedText = undefined;
   }
 
